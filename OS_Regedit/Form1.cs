@@ -146,18 +146,15 @@ namespace OS_Regedit
 
         private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
-            {
-                // Add this
-                dataGridView1.CurrentCell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                // Can leave these here - doesn't hurt
-                dataGridView1.Rows[e.RowIndex].Selected = true;
-                dataGridView1.Focus();
+            if (e.Button != MouseButtons.Right) return;
 
-                var m = new ContextMenu();
-                m.MenuItems.Add(new MenuItem("Удалить", menuItemRemoveKey_Click));
-                m.Show(dataGridView1, new Point(e.X, e.Y));
-            }
+            dataGridView1.CurrentCell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            dataGridView1.Rows[e.RowIndex].Selected = true;
+            dataGridView1.Focus();
+
+            var m = new ContextMenu();
+            m.MenuItems.Add(new MenuItem("Удалить", menuItemRemoveKey_Click));
+            m.Show(dataGridView1, new Point(e.X, e.Y));
         }
 
         private void menuItemRemoveKey_Click(object sender, System.EventArgs e)

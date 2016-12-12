@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace OS_Regedit
 {
@@ -17,8 +18,9 @@ namespace OS_Regedit
             if (string.IsNullOrEmpty(_tbNodeName.Text))
                 return;
 
-            _node.Nodes.Add(_tbNodeName.Text);
+            var node = _node.Nodes.Add(_tbNodeName.Text);
             _node.Expand();
+            node.Tag = new List<Key>();
             Close();
         }
     }
